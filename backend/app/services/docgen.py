@@ -59,3 +59,25 @@ class DocgenService:
         entry["pending"] = target != STATUS_ORDER[-1]
         entry["abnormal"] = action in NEGATIVE_ACTIONS
         return entry, f"文档模板已{action}"
+
+    def create_from_contract(
+        self, contract: dict[str, Any], doc_fields: dict[str, Any]
+    ) -> dict[str, Any]:
+        """按已发布契约生成文档记录：响应字段与沙箱测试取自同一份冻结契约。"""
+        rows = store.rows(MODULE)
+        entry = {"id": max((int(row.get("id", 0)) for row in rows), default=0) + 1}
+        entry["status"] = "已生成"
+        entry["pending"] = True
+        entry["abnormal"] = False
+        entry["模板编号"] = f"DOCG-{entry['id']:04d}"
+        entry["文档标题"] = f"{contract.get('接口编号')} {contract.get('接口名称') or ''} 接口文档".strip()
+        entry["目标接口"] = contract.get("接口编号")
+        entry["契约编号"] = contract.get("契约编号")
+        entry["契约版本"] = contract.get("版本号")
+        entry["生成格式"] = "Markdown"
+        entry["示例数据"] = doc_fields
+        entry["错误码表"] = doc_fields.get("错误码表")
+        entry["更新触发"] = "契约发布"
+        entry["模板状态"] = "已生成"
+        rows.append(entry)
+        return entry

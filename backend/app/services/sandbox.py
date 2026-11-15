@@ -59,3 +59,25 @@ class SandboxService:
         entry["pending"] = target != STATUS_ORDER[-1]
         entry["abnormal"] = action in NEGATIVE_ACTIONS
         return entry, f"沙箱实例已{action}"
+
+    def create_from_contract(
+        self, contract: dict[str, Any], request_spec: dict[str, Any]
+    ) -> dict[str, Any]:
+        """按已发布契约的冻结参数建立沙箱实例，请求规格随契约版本一起冻结。"""
+        rows = store.rows(MODULE)
+        entry = {"id": max((int(row.get("id", 0)) for row in rows), default=0) + 1}
+        entry["status"] = STATUS_ORDER[0]
+        entry["pending"] = True
+        entry["abnormal"] = False
+        entry["实例编号"] = f"SAND-{entry['id']:04d}"
+        entry["测试产品"] = f"{contract.get('接口编号')} {contract.get('接口名称') or ''}".strip()
+        entry["契约编号"] = contract.get("契约编号")
+        entry["契约版本"] = contract.get("版本号")
+        entry["测试参数"] = request_spec
+        entry["预期输出"] = request_spec.get("expected")
+        entry["实际输出"] = ""
+        entry["差异对比"] = "待执行"
+        entry["测试耗时"] = ""
+        entry["实例状态"] = "草稿"
+        rows.append(entry)
+        return entry

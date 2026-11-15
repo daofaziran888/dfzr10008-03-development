@@ -33,3 +33,32 @@ body { margin: 0; background: #f6f8fb; color: #1f2937; }
 .link { border: none; background: none; color: var(--brand); cursor: pointer; padding: 0; }
 .page-foot { display: flex; justify-content: space-between; margin-top: 8px; font-size: 12px; color: var(--muted); }
 .error-text { color: #b42318; }
+.primary-link { font-weight: 600; }
+.muted-text { color: var(--muted); }
+.pass-text { color: #067647; }
+.fail-text { color: #b42318; }
+.hint { color: var(--muted); font-size: 12px; }
+
+/* 契约工作台抽屉 */
+.drawer-mask { position: fixed; inset: 0; background: rgba(16, 24, 40, 0.45); z-index: 20; display: flex; justify-content: flex-end; }
+.drawer { width: min(880px, 92vw); height: 100%; background: #f6f8fb; overflow-y: auto; box-shadow: -8px 0 24px rgba(16, 24, 40, 0.18); }
+.drawer-head { position: sticky; top: 0; z-index: 2; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding: 16px 20px; background: #fff; border-bottom: 1px solid var(--border); }
+.drawer-head h3 { margin: 0 0 4px; font-size: 17px; }
+.drawer-body { padding: 16px 20px 32px; display: flex; flex-direction: column; gap: 14px; }
+.panel { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; }
+.panel h4 { margin: 0 0 10px; font-size: 14px; }
+.panel h5 { margin: 12px 0 6px; font-size: 13px; }
+.panel-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+.panel-actions { display: flex; gap: 8px; }
+.rule-card { border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; margin-bottom: 8px; background: #fbfcfe; }
+.rule-card strong { font-size: 13px; }
+.rule-card p { margin: 4px 0 0; font-size: 12px; color: var(--muted); }
+.check-group { margin-bottom: 8px; }
+.check-group ul { margin: 6px 0 0; padding-left: 4px; list-style: none; }
+.check-group li { font-size: 12px; margin-bottom: 4px; }
+.check-badge { display: inline-block; min-width: 44px; text-align: center; border-radius: 4px; padding: 1px 6px; margin-right: 6px; font-size: 11px; border: 1px solid currentColor; }
+.inner-table { margin-top: 6px; font-size: 12px; }
+.code-editor { width: 100%; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 12px; border: 1px solid var(--border); border-radius: 6px; padding: 8px 10px; resize: vertical; }
+.editor-label { display: block; font-size: 12px; color: var(--muted); margin: 8px 0 4px; }
+.result-box { border: 1px dashed var(--border); border-radius: 6px; padding: 8px 10px; margin-bottom: 8px; background: #fbfcfe; }
+.result-box p { margin: 4px 0; font-size: 12px; word-break: break-all; }
